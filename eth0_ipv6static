@@ -1,0 +1,6 @@
+Description='ipv6 config for cjdns NAT'
+Interface=eth0
+Connection=ethernet
+IP=dhcp
+IP6=static 
+Address6=fdfc:0000:0000:0000:0000:0000:0000:0001/64
