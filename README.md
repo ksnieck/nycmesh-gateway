@@ -31,4 +31,3 @@ Features
         * systemctl enable netctl@eth0-ipv6static
 
 * DNS?
-
