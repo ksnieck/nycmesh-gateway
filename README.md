@@ -25,9 +25,8 @@ Features
         * systemctl start radvd
     * configure static ip on eth0
         * eth0-ipv6static -> /etc/netctl/
-        * systemctl stop netctl@eth0
         * systemctl disable netctl@eth0
         * systemctl start netctl@eth0-ipv6static
         * systemctl enable netctl@eth0-ipv6static
 
-* DNS?
+* DNS

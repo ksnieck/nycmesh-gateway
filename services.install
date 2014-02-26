@@ -1,0 +1,28 @@
+post_install() {
+    systemctl daemon-reload
+
+    # setup cjdns
+    if [ -e "/etc/cjdroute.conf" ] then
+        cjdroute --genconf > /etc/cjdroute.conf
+        chmod 660 /etc/cjdroute.conf
+        # something here to enable ETHInterface
+    fi
+
+    # start cjdns
+    systemctl enable cjdns
+    systemctl start cjdns
+
+    # setup ip6tables NAT rules
+    systemctl enable ip6tables
+    systemctl start ip6tables
+
+    # start route broadcast daemon
+    systemctl enable radvd
+    systemctl start radvd
+
+    # reconfigure network interface
+    netctl disable eth0
+    netctl stop-all
+    netctl enable eth0_ipv6static
+    netctl start eth0_ipv6static
+}
