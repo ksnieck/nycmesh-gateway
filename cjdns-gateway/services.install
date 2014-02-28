@@ -1,9 +1,10 @@
 post_install() {
     systemctl daemon-reload
 
-    # setup cjdns
+    # setup cjdns - this should be done in cjdns systemd service
     if [ ! -e "/etc/cjdroute.conf" ]
     then
+        echo "Creating new /etc/cjdroute.conf"
         cjdroute --genconf > /etc/cjdroute.conf
         chmod 660 /etc/cjdroute.conf
         # something here to enable ETHInterface
