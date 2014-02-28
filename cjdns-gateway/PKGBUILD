@@ -1,0 +1,31 @@
+
+pkgname=cjdns-gateway
+pkgver=0.1
+pkgrel=1
+pkgdesc="Configure system to act as a gateway to a cjdns based mesh network."
+url="https://github.com/ksnieck/${pkgname}"
+license=('GPL2')
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+depends=('cjdns-git' 'radvd' 'netctl')
+source=(ip6tables.rules
+	ipv6-forwarding.conf
+	radvd.conf
+	ip6tables.rules
+	eth0_ipv6static)
+sha256sums=('6850c33eee04404fd6e4933a98041730090a0cc209ade7bc7377ee63b808b2ab'
+            '2bf2b58fc9435ee9fa50b9502fbf8dac7df8a7fd85ae17b0a706db597b3620ad'
+            'fb2236cdeba6c843c1daaf4b2fa41875662f290e1137c8bc05c39aa0d9a039f2'
+            '6850c33eee04404fd6e4933a98041730090a0cc209ade7bc7377ee63b808b2ab'
+            '33b94276d3e2076aff1da9dda4373bf9801e8be7805c437604eab57a50e07156')
+install="services.install"
+
+package() {
+    # install config files
+    install -D -m644 ip6tables.rules "${pkgdir}"/etc/iptables/ip6tables.rules
+    install -D -m644 ipv6-forwarding.conf "${pkgdir}"/etc/sysctl.d/ipv6-forwarding.conf
+    install -D -m644 radvd.conf "${pkgdir}"/etc/radvd.conf
+    install -D -m644 ip6tables.rules "${pkgdir}"/etc/iptables/ip6tables.rules
+    install -D -m644 eth0_ipv6static "${pkgdir}"/etc/netctl/eth0_ipv6static
+}
+
+
